@@ -3,13 +3,12 @@ import os
 import json
 from discord.ext import commands
 
-def owner_check(ctx):
-        return ctx.message.author.id == 350765965278969860
-
-
 with open("config.json") as f:
     config = json.load(f)
-    
+
+def owner_check(ctx):
+        return ctx.message.author.id == config.get('owner')
+            
 class owner(commands.Cog):
 
     def __init__(self, bot):

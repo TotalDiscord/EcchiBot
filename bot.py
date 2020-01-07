@@ -20,16 +20,13 @@ logger.addHandler(handler)
 with open("config.json") as f:
     config = json.load(f)
 
-
-OWNER = 350765965278969860
-
 #Cogs
 initial_extensions = ['cogs.misc',
                       'cogs.owner',
                       'cogs.nsfw']
 
 # Creating bot instance
-bot = commands.Bot(command_prefix=config.get('prefix'), self_bot=False, owner_id=OWNER, case_insensitive=True, help_command=None)
+bot = commands.Bot(command_prefix=config.get('prefix'), self_bot=False, owner_id=config.get('owner'), case_insensitive=True, help_command=None)
 
 #Loaading cogs
 
