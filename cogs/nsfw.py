@@ -16,7 +16,7 @@ def danbooru(tags):
         while True:
             try:
                 posts = dan.post_list(tags=tags, limit=1, random="True")
-                return posts[0]['file_url'], posts[0]['id'], posts[0]['created_at']
+                return posts[0]['file_url'], posts[0]['id'], posts[0]['created_at'], posts[0]['source']
             except KeyError:
                 continue
             break          
@@ -35,6 +35,8 @@ class nsfw(commands.Cog):
         post = await loop.run_in_executor(ThreadPoolExecutor(), danbooru, tags)
         embed = discord.Embed(title="Post: "+str(post[1]), description="Uploaded: "+str(post[2]), color=discord.Color.dark_red(), url="https://danbooru.donmai.us/posts/"+str(post[1]))
         embed.set_image(url=post[0])
+        embed.set_footer(text="Source: "+str(post[3]))
+        print(post[3])
         await ctx.send(embed=embed)
 
     @commands.cooldown(1,1)

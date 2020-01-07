@@ -69,10 +69,12 @@ async def on_command_error(ctx, error):
         msg = 'You do not have the required permission to use this command!.'
         user = ctx.message.author
         await user.send(msg)
+        await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.CommandNotFound):
         msg = '**This command does not exist!**'
         user = ctx.message.author
         await user.send(msg)
+        await ctx.message.add_reaction(emoji="❌")
     else:
         raise error
 
