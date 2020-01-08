@@ -17,8 +17,19 @@ handler = logging.FileHandler(filename='logs.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
-with open("config.json") as f:
-    config = json.load(f)
+if path.exists("config.json") == False:
+    with open('config.json', 'w') as configout:
+        json.dump({
+        "token": "Token goes here",
+        "prefix": "!",
+        "owner": "Owner ID goes here"
+         }, configout)
+    print("[INFO] config.json generated!!")
+    quit()
+
+else:
+    with open("config.json") as f:
+        config = json.load(f)
 
 #Cogs
 initial_extensions = ['cogs.misc',
@@ -109,5 +120,11 @@ async def help_image(ctx):
     await ctx.message.add_reaction(emoji="✅")
 
 # Authentication
-print("[INFO] Starting up and logging in...")
-bot.run(config.get('token'), bot=True, reconnect=True)
+
+if config.get('token') == "Token goes here":
+    print("[ERROR] No token present!")
+elif config.get('token') == "":
+    print("[ERROR] No token present!")
+else:
+    print("[INFO] Starting up and logging in...")
+    bot.run(config.get('token'), bot=True, reconnect=True)
