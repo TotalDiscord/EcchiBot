@@ -19,6 +19,8 @@ def danbooru(tags):
                 return posts[0]['file_url'], posts[0]['id'], posts[0]['created_at'], posts[0]['source']
             except KeyError:
                 continue
+            except ConnectionError:
+                continue
             break          
 
 class nsfw(commands.Cog):

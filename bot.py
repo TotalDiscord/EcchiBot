@@ -71,31 +71,27 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
-        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        msg = '[ERROR] This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.CheckFailure):
-        msg = 'You do not have the required permission to use this command!.'
+        msg = '[ERROR] You do not have the required permission to use this command!.'
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.CommandNotFound):
-        msg = 'This command does not exist!'
+        msg = '[ERROR] This command does not exist!'
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.MissingRequiredArgument):
-        msg = "Missing required argument(s)!"
+        msg = "[ERROR] Missing required argument(s)!"
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.CommandInvokeError):
-        try:
-            await ctx.send("[ERROR] CommandInvokeError!")
-
-        except ConnectionError:
-            await ctx.send("[ERROR] booru timed out, wait a few seconds and try again.")
+        await ctx.send("[ERROR] CommandInvokeError!")
     else:
         raise error
 
