@@ -101,7 +101,7 @@ async def help_image(ctx):
     helpembed = discord.Embed(color=discord.Color.red())
     helpembed.set_author(name="Help (Image commands)")
     helpembed.add_field(name="anime", value="Sends SFW anime images.",inline=False)
-    helpembed.add_field(name="booru", value="hentai (tag) , sends an image according to the tag you specifiy.",inline=False)
+    helpembed.add_field(name="booru", value="Usage: ``booru (tag)``, sends an image according to the tag you specifiy.",inline=False)
     helpembed.add_field(name="hentai", value="Sends hentai images.",inline=False)
     helpembed.add_field(name="help", value="Shows help for base commands.",inline=False)
     helpembed.add_field(name="help_image", value="Shows this message :rofl:",inline=False)
