@@ -71,7 +71,12 @@ async def on_command_error(ctx, error):
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.CommandNotFound):
-        msg = '**This command does not exist!**'
+        msg = 'This command does not exist!'
+        user = ctx.message.author
+        await user.send(msg)
+        await ctx.message.add_reaction(emoji="❌")
+    elif isinstance(error, commands.MissingRequiredArgument):
+        msg = "Missing required argument(s)!"
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
@@ -84,8 +89,9 @@ async def help(ctx):
     user = ctx.message.author
     helpembed = discord.Embed(color=discord.Color.red())
     helpembed.set_author(name="Help (Base commands)")
-    helpembed.add_field(name="-help_image", value="Shows help for image commands.",inline=False)
-    helpembed.add_field(name="-help", value="Shows this message :rofl:",inline=False)
+    helpembed.add_field(name="ping", value="Pong! Bot latency.",inline=False)
+    helpembed.add_field(name="help_image", value="Shows help for image commands.",inline=False)
+    helpembed.add_field(name="help", value="Shows this message :rofl:",inline=False)
     await user.send(embed=helpembed)
     await ctx.message.add_reaction(emoji="✅")
 
@@ -94,11 +100,11 @@ async def help_image(ctx):
     user = ctx.message.author
     helpembed = discord.Embed(color=discord.Color.red())
     helpembed.set_author(name="Help (Image commands)")
-    helpembed.add_field(name="-anime", value="Sends SFW anime images.",inline=False)
-    helpembed.add_field(name="-booru", value="hentai (tag) , sends an image according to the tag you specifiy.",inline=False)
-    helpembed.add_field(name="-hentai", value="Sends hentai images.",inline=False)
-    helpembed.add_field(name="-help", value="Shows help for base commands.",inline=False)
-    helpembed.add_field(name="-help_image", value="Shows this message :rofl:",inline=False)
+    helpembed.add_field(name="anime", value="Sends SFW anime images.",inline=False)
+    helpembed.add_field(name="booru", value="hentai (tag) , sends an image according to the tag you specifiy.",inline=False)
+    helpembed.add_field(name="hentai", value="Sends hentai images.",inline=False)
+    helpembed.add_field(name="help", value="Shows help for base commands.",inline=False)
+    helpembed.add_field(name="help_image", value="Shows this message :rofl:",inline=False)
     await user.send(embed=helpembed)
     await ctx.message.add_reaction(emoji="✅")
 
