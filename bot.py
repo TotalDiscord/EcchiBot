@@ -22,11 +22,10 @@ if path.exists("config.json") == False:
         json.dump({
         "token": "Token goes here",
         "prefix": "!",
-        "owner": "Owner ID goes here"
+        "owner": 350765965278969860
          }, configout)
     print("[INFO] config.json generated!!")
     quit()
-
 else:
     with open("config.json") as f:
         config = json.load(f)

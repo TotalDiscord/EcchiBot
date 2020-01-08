@@ -7,7 +7,7 @@ with open("config.json") as f:
     config = json.load(f)
 
 def owner_check(ctx):
-        return ctx.message.author.id == int(config.get('owner'))
+        return ctx.message.author.id == config.get('owner')
             
 class owner(commands.Cog):
 
