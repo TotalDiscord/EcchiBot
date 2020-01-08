@@ -12,14 +12,12 @@ from concurrent.futures import ThreadPoolExecutor
 
 dan = Danbooru('danbooru')
 def danbooru(tags):
-    for i in range(0,5):
+    for i in range(0,10):
         while True:
             try:
                 posts = dan.post_list(tags=tags, limit=1, random="True")
                 return posts[0]['file_url'], posts[0]['id'], posts[0]['created_at'], posts[0]['source']
             except KeyError:
-                continue
-            except ConnectionError:
                 continue
             break          
 
