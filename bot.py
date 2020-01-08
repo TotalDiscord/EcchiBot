@@ -90,6 +90,12 @@ async def on_command_error(ctx, error):
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
+    elif isinstance(error, commands.CommandInvokeError):
+        try:
+            await ctx.send("[ERROR] CommandInvokeError!")
+
+        except ConnectionError:
+            await ctx.send("[ERROR] booru timed out, wait a few seconds and try again.")
     else:
         raise error
 
