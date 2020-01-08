@@ -3,4 +3,3 @@ logs.log
 presence.txt
 cogs/__pycache__/*
 .vscode/*
-config.json
