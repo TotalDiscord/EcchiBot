@@ -22,7 +22,9 @@ if path.exists("config.json") == False:
         json.dump({
         "token": "Token goes here",
         "prefix": "!",
-        "owner": 350765965278969860
+        "owner": 350765965278969860,
+        "danbooru_username": "",
+        "danbooru_key": ""
          }, configout)
     print("[INFO] config.json generated!!")
     quit()

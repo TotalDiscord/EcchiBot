@@ -3,6 +3,7 @@ import praw
 import discord
 import random
 import asyncio
+import json
 from pybooru import Danbooru
 from random import randint, sample
 from os import path
@@ -10,7 +11,10 @@ from discord.ext import commands, tasks
 from discord.ext.commands import cooldown
 from concurrent.futures import ThreadPoolExecutor
 
-dan = Danbooru('danbooru')
+with open("config.json") as f:
+    config = json.load(f)
+
+dan = Danbooru('danbooru', username=config.get('danbooru_username'), api_key=config.get('danbooru_key'))
 def danbooru(tags):
     for i in range(0,10):
         while True:
