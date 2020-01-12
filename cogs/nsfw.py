@@ -16,7 +16,7 @@ with open("config.json") as f:
 
 dan = Danbooru('danbooru', username=config.get('danbooru_username'), api_key=config.get('danbooru_key'))
 def danbooru(tags):
-    for i in range(0,10):
+    for i in range(0,5):
         while True:
             try:
                 posts = dan.post_list(tags=tags, limit=1, random="True")
