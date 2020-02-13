@@ -73,22 +73,22 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
-        msg = '[ERROR] This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        msg = '``[ERROR] This command is on a cooldown, please try again in {:.2f}s``'.format(error.retry_after)
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.CheckFailure):
-        msg = '[ERROR] You do not have the required permission to use this command!.'
+        msg = '``[ERROR] You do not have the required permission to use this command!.``'
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.CommandNotFound):
-        msg = '[ERROR] This command does not exist!'
+        msg = '``[ERROR] This command does not exist!``'
         user = ctx.message.author
         await user.send(msg)
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, commands.MissingRequiredArgument):
-        msg = "[ERROR] Missing required argument(s)!"
+        msg = "``[ERROR] Missing required argument(s)!``"
         user = ctx.message.author
         await user.send(msg)
         await ctx.send("```"+str(error)+"```")
@@ -96,8 +96,8 @@ async def on_command_error(ctx, error):
     elif isinstance(error, ConnectionError):
         print("Fucker ConnectionError. bot")
     elif isinstance(error, commands.CommandInvokeError):
-        await ctx.send("[ERROR] CommandInvokeError!")
-        await ctx.send("```"+str(error)+"```")
+        await ctx.send("``[ERROR] CommandInvokeError!``")
+        await ctx.send("**"+str(error)+"**")
     elif isinstance(error, TimeoutError):
         print("Fucker timed out. bot")
     else:
