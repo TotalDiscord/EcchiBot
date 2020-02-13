@@ -91,9 +91,15 @@ async def on_command_error(ctx, error):
         msg = "[ERROR] Missing required argument(s)!"
         user = ctx.message.author
         await user.send(msg)
+        await ctx.send("```"+str(error)+"```")
         await ctx.message.add_reaction(emoji="❌")
+    elif isinstance(error, ConnectionError):
+        print("Fucker ConnectionError. bot")
     elif isinstance(error, commands.CommandInvokeError):
         await ctx.send("[ERROR] CommandInvokeError!")
+        await ctx.send("```"+str(error)+"```")
+    elif isinstance(error, TimeoutError):
+        print("Fucker timed out. bot")
     else:
         raise error
 
