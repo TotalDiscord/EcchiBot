@@ -90,8 +90,8 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.MissingRequiredArgument):
         msg = "``[ERROR] Missing required argument(s)!``"
         user = ctx.message.author
-        await user.send(msg)
-        await ctx.send("```"+str(error)+"```")
+        await ctx.send(msg)
+        await ctx.send("**"+str(error)+"**")
         await ctx.message.add_reaction(emoji="❌")
     elif isinstance(error, ConnectionError):
         print("Fucker ConnectionError. bot")
