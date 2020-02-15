@@ -56,9 +56,9 @@ class nsfw(commands.Cog):
 
     @commands.cooldown(1,1)
     @commands.command()
-    async def booru(self, ctx, tags):
+    async def booru(self, ctx, tags, tags1: str=""):
         await ctx.message.delete()
-        embed = await booruembed(tags=tags)
+        embed = await booruembed(tags=tags+" "+tags1)
         await ctx.send(embed=embed)
 
     @commands.cooldown(1,1)
