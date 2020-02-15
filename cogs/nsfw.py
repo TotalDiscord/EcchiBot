@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 with open("config.json") as f:
     config = json.load(f)
 
+#Functions
 dan = Danbooru('danbooru', username=config.get('danbooru_username'), api_key=config.get('danbooru_key'))
 def danbooru(tags):
     for i in range(0,5):
@@ -31,6 +32,12 @@ def danbooru(tags):
                 time.sleep(5)
                 continue                
             break
+#Tasks
+@tasks.loop(minutes=5, reconnect=False)
+async def keepboorualive():
+    print("Stayin alive, stayin alive, aaah aah aah ah STAYYYIN ALLIIIIIVE!")
+    danbooru(tags=None)
+
 
 async def booruembed(tags: str = None):    
         loop = asyncio.get_event_loop()
@@ -45,28 +52,36 @@ class nsfw(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.counter = 0
+    
+    #Events
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print("Starting ting")
+        keepboorualive.start()
 
+    #Commands
     @commands.cooldown(1,1)
     @commands.is_nsfw()
     @commands.command()
     async def hentai(self, ctx):
-        await ctx.message.delete()
         embed = await booruembed(tags="rating:explicit")
         await ctx.send(embed=embed)
+        await ctx.message.delete()
 
     @commands.cooldown(1,1)
+    @commands.is_nsfw()
     @commands.command()
     async def booru(self, ctx, tags, tags1: str=""):
-        await ctx.message.delete()
         embed = await booruembed(tags=tags+" "+tags1)
         await ctx.send(embed=embed)
+        await ctx.message.delete()
 
     @commands.cooldown(1,1)
     @commands.command()
     async def anime(self, ctx):
-        await ctx.message.delete()
         embed = await booruembed(tags="rating:safe")
         await ctx.send(embed=embed)
+        await ctx.message.delete()
 
 
 def setup(bot):
