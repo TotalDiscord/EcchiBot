@@ -120,7 +120,7 @@ async def help(ctx):
 # Authentication
 
 if config.get('token') == "Token goes here":
-    print("[ERROR] No token present!")
+    print("[ERROR] Change token in config!")
 elif config.get('token') == "":
     print("[ERROR] No token present!")
 else:
