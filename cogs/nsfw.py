@@ -30,7 +30,15 @@ def danbooru(tags):
                 print("Fucker timed out ConnectionError")
                 time.sleep(5)
                 continue                
-            break          
+            break
+
+async def booruembed(tags: str = None):    
+        loop = asyncio.get_event_loop()
+        post = await loop.run_in_executor(ThreadPoolExecutor(), danbooru, tags)
+        embed = discord.Embed(title="Post: "+str(post[1]), description="Uploaded: "+str(post[2]), color=discord.Color.dark_red(), url="https://danbooru.donmai.us/posts/"+str(post[1]))
+        embed.set_image(url=post[0])
+        embed.set_footer(text="Source: "+str(post[3]))
+        return embed
 
 class nsfw(commands.Cog):
 
@@ -43,34 +51,21 @@ class nsfw(commands.Cog):
     @commands.command()
     async def hentai(self, ctx):
         await ctx.message.delete()
-        loop = asyncio.get_event_loop()
-        tags = "rating:explicit"
-        post = await loop.run_in_executor(ThreadPoolExecutor(), danbooru, tags)
-        embed = discord.Embed(title="Post: "+str(post[1]), description="Uploaded: "+str(post[2]), color=discord.Color.dark_red(), url="https://danbooru.donmai.us/posts/"+str(post[1]))
-        embed.set_image(url=post[0])
-        embed.set_footer(text="Source: "+str(post[3]))
+        embed = await booruembed(tags="rating:explicit")
         await ctx.send(embed=embed)
 
     @commands.cooldown(1,1)
     @commands.command()
     async def booru(self, ctx, tags):
         await ctx.message.delete()
-        loop = asyncio.get_event_loop()
-        post = await loop.run_in_executor(ThreadPoolExecutor(), danbooru, tags)
-        embed = discord.Embed(title="Post: "+str(post[1]), description="Uploaded: "+str(post[2]), color=discord.Color.dark_red(), url="https://danbooru.donmai.us/posts/"+str(post[1]))
-        embed.set_image(url=post[0])
-        embed.set_footer(text="Source: "+str(post[3]))
+        embed = await booruembed(tags=tags)
         await ctx.send(embed=embed)
 
     @commands.cooldown(1,1)
     @commands.command()
-    async def anime(self, ctx, tags: str = "rating:safe"):
+    async def anime(self, ctx):
         await ctx.message.delete()
-        loop = asyncio.get_event_loop()
-        post = await loop.run_in_executor(ThreadPoolExecutor(), danbooru, tags)
-        embed = discord.Embed(title="Post: "+str(post[1]), description="Uploaded: "+str(post[2]), color=discord.Color.dark_red(), url="https://danbooru.donmai.us/posts/"+str(post[1]))
-        embed.set_image(url=post[0])
-        embed.set_footer(text="Source: "+str(post[3]))
+        embed = await booruembed(tags="rating:safe")
         await ctx.send(embed=embed)
 
 
