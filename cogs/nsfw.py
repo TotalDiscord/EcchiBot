@@ -35,7 +35,7 @@ def danbooru(tags):
 async def booruembed(tags: str = None):    
         loop = asyncio.get_event_loop()
         post = await loop.run_in_executor(ThreadPoolExecutor(), danbooru, tags)
-        embed = discord.Embed(title="Post: "+str(post[1]), description="Uploaded: "+str(post[2]), color=discord.Color.dark_red(), url="https://danbooru.donmai.us/posts/"+str(post[1]))
+        embed = discord.Embed(title="Post: "+str(post[1]), description="Uploaded: "+str(post[2]), color=discord.Color.dark_blue(), url="https://danbooru.donmai.us/posts/"+str(post[1]))
         embed.set_image(url=post[0])
         embed.set_footer(text="Source: "+str(post[3]))
         return embed
