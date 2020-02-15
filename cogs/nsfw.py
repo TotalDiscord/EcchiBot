@@ -39,6 +39,7 @@ class nsfw(commands.Cog):
         self.counter = 0
 
     @commands.cooldown(1,1)
+    @commands.is_nsfw()
     @commands.command()
     async def hentai(self, ctx):
         await ctx.message.delete()
