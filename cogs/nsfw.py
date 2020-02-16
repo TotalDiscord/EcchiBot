@@ -57,7 +57,6 @@ class nsfw(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("Starting ting")
-        keepboorualive.start()
 
     #Commands
     @commands.cooldown(1,1)
