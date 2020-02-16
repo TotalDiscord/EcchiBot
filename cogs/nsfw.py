@@ -1,6 +1,5 @@
 import os, praw, discord, random, asyncio, json, time
 from pybooru import Danbooru
-from pybooru import exceptions
 from random import randint, sample
 from os import path
 from discord.ext import commands, tasks
