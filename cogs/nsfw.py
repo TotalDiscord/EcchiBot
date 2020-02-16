@@ -1,5 +1,6 @@
 import os, praw, discord, random, asyncio, json, time
 from pybooru import Danbooru
+from pybooru import exceptions
 from random import randint, sample
 from os import path
 from discord.ext import commands, tasks
@@ -15,27 +16,18 @@ def danbooru(tags):
     for i in range(0,5):
         while True:
             try:
-                time.sleep(1) #Wait x seconds so that danbooru doesnt fuck itself
-                print("Sleep done")
                 posts = dan.post_list(tags=tags, limit=1, random="True")
                 print("Ran booru fetchery")
                 return posts[0]['file_url'], posts[0]['id'], posts[0]['created_at'], posts[0]['source']
             except KeyError:
                 print("Got KeyError")
                 continue
-            except TimeoutError:
-                print("Fucker timed out")
-                time.sleep(5)
-                continue
-            except ConnectionError:
-                print("Fucker timed out ConnectionError")
-                time.sleep(5)
-                continue                
+            except:
+                continue            
             break
 #Tasks
-@tasks.loop(minutes=10, reconnect=True,)
+@tasks.loop(seconds=0.5, reconnect=True)
 async def keepboorualive():
-    print("Stayin alive, stayin alive, aaah aah aah ah STAYYYIN ALLIIIIIVE!")
     danbooru(tags=None)
 
 
@@ -57,7 +49,7 @@ class nsfw(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         keepboorualive.stop()
-        keepboorualive.start()
+        #keepboorualive.start()
 
     #Commands
     @commands.cooldown(1,1)
