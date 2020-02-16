@@ -56,6 +56,7 @@ class nsfw(commands.Cog):
     #Events
     @commands.Cog.listener()
     async def on_ready(self):
+        keepboorualive.stop()
         keepboorualive.start()
 
     #Commands
