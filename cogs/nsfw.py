@@ -33,7 +33,7 @@ def danbooru(tags):
                 continue                
             break
 #Tasks
-@tasks.loop(minutes=5, reconnect=True)
+@tasks.loop(minutes=10, reconnect=True,)
 async def keepboorualive():
     print("Stayin alive, stayin alive, aaah aah aah ah STAYYYIN ALLIIIIIVE!")
     danbooru(tags=None)
