@@ -11,7 +11,7 @@ class misc(commands.Cog):
         self.bot = bot
         self.counter = 0
 
-    @commands.check(owner_check)
+    #@commands.check(owner_check)
     @commands.command(name="ping", pass_context=True)
     async def pingt(self, ctx):
         channel = ctx.message.channel
