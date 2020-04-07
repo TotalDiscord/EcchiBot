@@ -21,6 +21,8 @@ def danbooru(tags):
             except KeyError:
                 print("Got KeyError")
                 continue
+            except IndexError:
+                break
             except:
                 continue            
             break
@@ -54,8 +56,12 @@ class nsfw(commands.Cog):
     @commands.cooldown(1,1)
     @commands.is_nsfw()
     @commands.command()
-    async def hentai(self, ctx):
-        embed = await booruembed(tags="rating:explicit")
+    async def hentai(self, ctx, tag: str=""):
+        if tag=="":
+            embed = await booruembed(tags="rating:explicit")
+        else:
+            embed = await booruembed(tags="rating:explicit "+tag)
+
         await ctx.send(embed=embed)
         await ctx.message.delete()
 
