@@ -43,7 +43,7 @@ class nsfw(commands.Cog):
         self.bot = bot
         self.counter = 0
     
-    
+
     #Commands
     @commands.cooldown(1,1)
     @commands.is_nsfw()
@@ -55,7 +55,6 @@ class nsfw(commands.Cog):
             embed = await booruembed(tags="rating:explicit "+tag)
 
         await ctx.send(embed=embed)
-        await ctx.message.delete()
 
     @commands.cooldown(1,1)
     @commands.is_nsfw()
@@ -63,14 +62,12 @@ class nsfw(commands.Cog):
     async def booru(self, ctx, tags, tags1: str=""):
         embed = await booruembed(tags=tags+" "+tags1)
         await ctx.send(embed=embed)
-        await ctx.message.delete()
 
     @commands.cooldown(1,1)
     @commands.command()
     async def anime(self, ctx):
         embed = await booruembed(tags="rating:safe")
         await ctx.send(embed=embed)
-        await ctx.message.delete()
 
 
 def setup(bot):
