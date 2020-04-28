@@ -2,7 +2,7 @@ import os, praw, discord, random, asyncio, json, time
 from pybooru import Danbooru
 from random import randint, sample
 from os import path
-from discord.ext import commands, tasks
+from discord.ext import commands
 from discord.ext.commands import cooldown
 from concurrent.futures import ThreadPoolExecutor
 
@@ -27,10 +27,6 @@ def danbooru(tags):
             except:
                 continue            
             break
-#Tasks
-@tasks.loop(seconds=0.5, reconnect=True)
-async def keepboorualive():
-    danbooru(tags=None)
 
 
 async def booruembed(tags: str = None):    
@@ -47,12 +43,7 @@ class nsfw(commands.Cog):
         self.bot = bot
         self.counter = 0
     
-    #Events
-    @commands.Cog.listener()
-    async def on_ready(self):
-        keepboorualive.stop()
-        #keepboorualive.start()
-
+    
     #Commands
     @commands.cooldown(1,1)
     @commands.is_nsfw()
