@@ -9,10 +9,11 @@ from concurrent.futures import ThreadPoolExecutor
 with open("config.json") as f:
     config = json.load(f)
 
-#Functions
-dan = Danbooru('danbooru', username=config.get('danbooru_username'), api_key=config.get('danbooru_key'))
+#Functiona
+
 def danbooru(tags):
     for i in range(0,5):
+        dan = Danbooru('danbooru', username=config.get('danbooru_username'), api_key=config.get('danbooru_key'))
         while True:
             try:
                 posts = dan.post_list(tags=tags, limit=1, random="True")
