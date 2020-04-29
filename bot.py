@@ -101,8 +101,8 @@ async def help(ctx):
     user = ctx.message.author
     helpembed = discord.Embed(color=discord.Color.red())
     helpembed.set_author(name="Help (contact cikeZ00#5068 for help)")
-    helpembed.add_field(name="anime", value="USAGE: ``anime or anime (tag)``,  random **SFW** image.",inline=False)
-    helpembed.add_field(name="hentai", value="USAGE: ``hentai or hentai (tag)``,  random **NSFW** image. \n NOTE: ``Only works in NSFW marked channels``",inline=False)
+    helpembed.add_field(name="anime", value="Usage: ``anime or anime (tag)``,  random **SFW** image.",inline=False)
+    helpembed.add_field(name="hentai", value="Usage: ``hentai or hentai (tag)``,  random **NSFW** image. \n NOTE: ``Only works in NSFW marked channels``",inline=False)
     helpembed.add_field(name="ping", value="Plays ping pong",inline=False)
     helpembed.add_field(name="help", value="Shows help.",inline=False)
     await user.send(embed=helpembed)
