@@ -4,7 +4,6 @@
 Run ```pip install -r requirements.txt```
 
 ```
-praw==6.4.0
 Pybooru==4.1.0
 discord==1.0.1
 ```
