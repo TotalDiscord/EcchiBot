@@ -65,8 +65,8 @@ class nsfw(commands.Cog):
 
     @commands.cooldown(1,1)
     @commands.command()
-    async def anime(self, ctx):
-        embed = await booruembed(tags="rating:safe")
+    async def anime(self, ctx, tag: str=""):
+        embed = await booruembed(tags="rating:safe"+ " "+ tag)
         await ctx.send(embed=embed)
 
 
