@@ -1,4 +1,4 @@
-import os, praw, discord, random, asyncio, json, time
+import os, discord, random, asyncio, json, time
 from pybooru import Danbooru
 from random import randint, sample
 from os import path
