@@ -32,10 +32,6 @@ else:
     with open("config.json") as f:
         config = json.load(f)
 
-#Cogs
-initial_extensions = ['cogs.misc',
-                      'cogs.owner',
-                      'cogs.nsfw']
 
 # Creating bot instance
 bot = commands.Bot(command_prefix=config.get('prefix'), self_bot=False, owner_id=config.get('owner'), case_insensitive=True, help_command=None)
@@ -43,8 +39,11 @@ bot = commands.Bot(command_prefix=config.get('prefix'), self_bot=False, owner_id
 #Loaading cogs
 
 if __name__ == '__main__':
-    for extension in initial_extensions:
-        bot.load_extension(extension)
+    for extension in os.listdir("cogs"):
+        if extension == "__pycache__":
+            pass
+        else:
+            bot.load_extension("cogs."+extension[:-3])
 
 #listeners
 
@@ -81,9 +80,7 @@ async def on_command_error(ctx, error):
         user = ctx.message.author
         await user.send(msg)
     elif isinstance(error, commands.CommandNotFound):
-        msg = '> [ERROR] This command does not exist!'
-        user = ctx.message.author
-        await user.send(msg)
+        ...
     elif isinstance(error, commands.MissingRequiredArgument):
         msg = "> [ERROR] Missing required argument(s)!"
         user = ctx.message.author
@@ -95,17 +92,6 @@ async def on_command_error(ctx, error):
     else:
         raise error
 
-#Help commands
-@bot.command()
-async def help(ctx):
-    user = ctx.message.author
-    helpembed = discord.Embed(color=discord.Color.red())
-    helpembed.set_author(name="Help (contact cikeZ00#5068 for help)")
-    helpembed.add_field(name="anime", value="Usage: ``anime or anime (tag)``,  random **SFW** image.",inline=False)
-    helpembed.add_field(name="hentai", value="Usage: ``hentai or hentai (tag)``,  random **NSFW** image. \n NOTE: ``Only works in NSFW marked channels``",inline=False)
-    helpembed.add_field(name="ping", value="Plays ping pong",inline=False)
-    helpembed.add_field(name="help", value="Shows help.",inline=False)
-    await user.send(embed=helpembed)
 
 # Authentication
 
