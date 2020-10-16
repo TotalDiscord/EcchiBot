@@ -47,7 +47,7 @@ class nsfw(commands.Cog):
     #Commands
     @commands.cooldown(1,1)
     @commands.is_nsfw()
-    @commands.command()
+    @commands.command(description="Post hentai.")
     async def hentai(self, ctx, tag: str=""):
         if tag=="":
             embed = await booruembed(tags="rating:explicit")
@@ -58,13 +58,13 @@ class nsfw(commands.Cog):
 
     @commands.cooldown(1,1)
     @commands.is_nsfw()
-    @commands.command()
+    @commands.command(description="Post hentai with 1 or 2 user defined tags.")
     async def booru(self, ctx, tags, tags1: str=""):
         embed = await booruembed(tags=tags+" "+tags1)
         await ctx.send(embed=embed)
 
     @commands.cooldown(1,1)
-    @commands.command()
+    @commands.command(description="SFW command. (Random or 1 user defined tag)")
     async def anime(self, ctx, tag: str=""):
         embed = await booruembed(tags="rating:safe"+ " "+ tag)
         await ctx.send(embed=embed)

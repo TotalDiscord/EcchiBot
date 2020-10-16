@@ -12,7 +12,7 @@ class misc(commands.Cog):
         self.counter = 0
 
     #@commands.check(owner_check)
-    @commands.command(name="ping", pass_context=True)
+    @commands.command(name="ping", description="Shows ping", pass_context=True)
     async def pingt(self, ctx):
         channel = ctx.message.channel
         t1 = time.perf_counter()
@@ -20,7 +20,7 @@ class misc(commands.Cog):
         t2 = time.perf_counter()
         await ctx.send("Pong: ``{}ms`` :ping_pong:".format(round((t2-t1)*1000)))
 
-    @commands.command(name="cike_time")
+    @commands.command(name="cike_time", description="Cike time (CET)")
     async def localtime(self, ctx):
         seconds = time.time()
         local_time = time.ctime(seconds)
